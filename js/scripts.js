@@ -65,6 +65,18 @@ function EmailAddress(email, type) {
   this.type = type;
 }
 
+Address.prototype.addPhysicalAddress = function(contact) {
+  this.contacts[contact.id] = contact;
+}
+
+Address.prototype.addAddress = function(physicalAddress, emailAddress) {
+  this.physicalAddress[physicalAddress] = physicalAddress;
+  this.emailAddress[emailAddress] = emailAddress;
+};
+
+
+
+
 // User Interface Logic ---------
 let addressBook = new AddressBook();
 
