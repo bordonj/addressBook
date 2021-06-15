@@ -35,22 +35,19 @@ Output: physicalAddress1 = {
   zip =  "92114";
   type = "home"; }
 
-Test: 'It will create a method to add the PhyscialAddress object and the emailAddress object to the Address Object'
+Test: 'It will create a method to add the PhyscialAddress object and the EmailAddress object to the Address Object'
 Code: address1.addAddress(physicalAddress1, emailAddress1);
 Output: address1 = {
   physicaAddress1 = {}
   emailAddress1 = {}  
 }
 
-
-
-Test: 'It will return an Addresses object with an Address object, all inside the Contact object'
-Code: let contact1 = new Contact('Jennifer', 'Bordon, '123-456-7890', 'jennifer.bordon@gmail.com', '123 Sesame St')
+Test: 'it will create a method to add the Address object to the Contact object'
+Code: contact1.addAdress(address1);
 Output: contact1 = {
-  this.firstName = Jennifer;
-  this.lastName = Bordon;
-  this.phoneNumber = 123-456-7890;
-  this.emailAddress = jennifer.bordon@gmail.com;
-  this.address = 123 Sesame St;
+  address1 {};
+  firstName = Jennifer;
+  lastName = Bordon;
+  phoneNumber = 123-456-7890
 }
 ```

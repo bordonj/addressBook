@@ -2,7 +2,7 @@
 function AddressBook() {
   this.contacts = {};
   this.currentId = 0;
-}https://github.com/ShoNewman/address-book.git
+}
 
 AddressBook.prototype.addContact = function(contact) {
   contact.id = this.assignId();
@@ -37,6 +37,10 @@ function Contact(firstName, lastName, phoneNumber, emailAddress, address) {
   this.addresses = {};
 }
 
+Contact.prototype.addAddress = function(addresses) {
+  this.addresses = addresses;
+};
+
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 };
@@ -45,13 +49,18 @@ Contact.prototype.update = function(newName) {
   return this.firstName = newName;
 }
 
-
 // Buisness Logic for Addresses
-function Address() {
+function Addresses() {
   this.physicalAddress = {};
   this.emailAddress = {};
 }
 
+Addresses.prototype.addAddress = function(physicalAddress, emailAddress) {
+  this.physicalAddress[physicalAddress.street] = physicalAddress;
+  this.emailAddress[emailAddress.email] = emailAddress;
+};
+
+// Business Logic for Physical Address
 function PhysicalAddress(street, city, state, zip, type) {
   this.street = street;
   this.city = city;
@@ -60,22 +69,11 @@ function PhysicalAddress(street, city, state, zip, type) {
   this.type = type;
 }
 
+// Business Logic for Email Address
 function EmailAddress(email, type) {
   this.email = email;
   this.type = type;
 }
-
-Address.prototype.addPhysicalAddress = function(contact) {
-  this.contacts[contact.id] = contact;
-}
-
-Address.prototype.addAddress = function(physicalAddress, emailAddress) {
-  this.physicalAddress[physicalAddress] = physicalAddress;
-  this.emailAddress[emailAddress] = emailAddress;
-};
-
-
-
 
 // User Interface Logic ---------
 let addressBook = new AddressBook();
