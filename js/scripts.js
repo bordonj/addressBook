@@ -2,7 +2,7 @@
 function AddressBook() {
   this.contacts = {};
   this.currentId = 0;
-}
+}https://github.com/ShoNewman/address-book.git
 
 AddressBook.prototype.addContact = function(contact) {
   contact.id = this.assignId();
@@ -30,10 +30,11 @@ AddressBook.prototype.deleteContact = function(id) {
 }
 
 //Business Logic for Contacts -----------------
-function Contact(firstName, lastName, phoneNumber) {
+function Contact(firstName, lastName, phoneNumber, emailAddress, address) {
   this.firstName = firstName;
   this.lastName = lastName;
   this.phoneNumber = phoneNumber;
+  this.addresses = {};
 }
 
 Contact.prototype.fullName = function() {
@@ -42,6 +43,26 @@ Contact.prototype.fullName = function() {
 
 Contact.prototype.update = function(newName) {
   return this.firstName = newName;
+}
+
+
+// Buisness Logic for Addresses
+function Address() {
+  this.physicalAddress = {};
+  this.emailAddress = {};
+}
+
+function PhysicalAddress(street, city, state, zip, type) {
+  this.street = street;
+  this.city = city;
+  this.state = state;
+  this.zip = zip;
+  this.type = type;
+}
+
+function EmailAddress(email, type) {
+  this.email = email;
+  this.type = type;
 }
 
 // User Interface Logic ---------
