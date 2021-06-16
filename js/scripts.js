@@ -55,10 +55,17 @@ function Addresses() {
   this.emailAddress = {};
 }
 
-Addresses.prototype.addAddress = function(physicalAddress, emailAddress) {
+Addresses.prototype.addAddresses = function(physicalAddress, emailAddress) {
   this.physicalAddress[physicalAddress.street] = physicalAddress;
   this.emailAddress[emailAddress.email] = emailAddress;
 };
+// Addresses.prototype.addPhysicalAddress = function(physicalAddress) {
+//   this.physicalAddress[physicalAddress.street] = physicalAddress;
+// };
+
+// Addresses.prototype.addEmailAddress = function(emailAddress) {
+//   this.emailAddress[emailAddress.email] = emailAddress;
+// };
 
 // Business Logic for Physical Address
 function PhysicalAddress(street, city, state, zip, type) {
@@ -109,12 +116,16 @@ function attachContactListeners() {
     $("#show-contact").hide();
     displayContactDetails(addressBook);
   });
+ 
 }
 
 $(document).ready(function() {
   attachContactListeners();
+  
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
+
+    // Basic Contact Details
     const inputtedFirstName = $("input#new-first-name").val();
     const inputtedLastName = $("input#new-last-name").val();
     const inputtedPhoneNumber = $("input#new-phone-number").val();
@@ -122,9 +133,103 @@ $(document).ready(function() {
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
     $("input#new-phone-number").val("");
-    
+
     let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber);
     addressBook.addContact(newContact);
     displayContactDetails(addressBook);
-  });
+
+    // address ui logic
+    let newAddress = new Addresses();
+    // Physcial Address 
+    const inputtedStreet = $("input#street-name").val();
+    const inputtedCity = $("input#city").val();
+    const inputtedState = $("input#state").val();
+    const inputtedZipcode = $("input#zipcode").val();
+    const physicalAddressType = $("select#physical-address-type").val();
+    $("input#street-name").val('');
+    $("input#city").val('');
+    $("input#state").val('');
+    $("input#zipcode").val('');
+    $("select#physical-address-type").val('');
+
+    let newPhysicalAddress = new PhysicalAddress(inputtedStreet, inputtedCity, inputtedState, inputtedZipcode, physicalAddressType);
+    console.log(newPhysicalAddress);
+    // newAddress.addPhysicalAddress(newPhysicalAddress);
+    // console.log('new physical address', newAddress);
+    newContact.addAddress(newAddress);
+    console.log('trying to add physical address to contact', newContact)
+
+    const emailAddressType = $("select#email-address-type").val();
+    const inputtedEmail = $("input#email-address").val();
+    newEmailAddress = new EmailAddress (inputtedEmail, emailAddressType);
+    console.log(newEmailAddress);
+    // newAddress.addEmailAddress(newEmailAddress);
+    // console.log('new email address', newAddress);
+
+    
+    newAddress.addAddresses(newPhysicalAddress, newEmailAddress);
+    console.log('new address'. newAddress);
+    newContact.addAddress(newAddress);
+    console.log('trying to add email address to contact', newContact)
+    console.log('addressBook log', addressBook);
+  })
+
+
+  let currentId = 0;
+  $('#addPhysicalAddress').on('click', function() {
+    function currentDivId () {
+      return currentId += 1;
+    }
+    currentDivId();
+    
+    let htmlString = 
+    `<div class="new-physical-address" id='${currentId}'>
+      <div class="row section"> 
+        <div class="col-md-1">
+          <button type="button" class="btn btn-primary removePhysicalAddress">-</button>
+        </div>
+        <div class="col-md">
+          <h3>Physical Address</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <select type="text"  class="form-control" id="physical-address-type">
+              <option selected disabled value="">Choose Type</option>
+              <option value="home">Home</option>
+              <option value="work">Work</option>
+              <option value="recreation">Recreation</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md">
+          <label for="street-name">Street:</label>
+          <input type="text"  class="form-control" id="street-name">
+        </div>
+      </div>
+      <div class='row'>
+        <div class="form-group col-md-6">
+          <label for="city">City:</label>
+          <input type="text"  class="form-control" id="city">
+        </div>
+        <div class="form-group col-md">
+          <label for="state">State:</label>
+          <input type="text"  class="form-control" id="state">
+        </div>
+        <div class="form-group col-md">
+          <label for="zipcode">Zipcode:</label>
+          <input type="text"  class="form-control" id="zipcode">
+        </div>
+      </div>
+    </div>`
+  
+    $('.new-address-input').append(htmlString);
+  
+
+    $(".new-address-input").on("click", ".removePhysicalAddress", function() {
+      $(`#${currentId}`).remove();
+    });
+  })
+  
 });

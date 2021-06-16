@@ -1,3 +1,14 @@
 #show-contact {
   display: none;
 }
+.section {
+  border-top: solid 1px rgb(235, 230, 230);
+  margin-top: 5%;
+  padding-top: 5%;
+}
+.btn {
+  display: block;
+  margin: auto;
+  margin-top: 8%;
+  margin-bottom: 5%;
+}

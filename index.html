@@ -11,10 +11,13 @@
 <body>
   <div class="container">
     <h1>Address Book</h1>
-    <div class="row">
+
+    <div class="row"> 
       <div class="col-md-6">
         <hr>
         <h2>Add a Contact:</h2>
+
+        <!-- Add New Contact Form -->
         <form id="new-contact">
           <div class="form-group">
             <label for="new-first-name">First Name</label>
@@ -28,20 +31,90 @@
             <label for="new-phone-number">Phone Number</label>
             <input type="text"  class="form-control" id="new-phone-number">
           </div>
-          <button type="submit" class="btn-primary">Add</button>
+
+          <!-- Address Input Fields -->
+          <div class="row section">
+            <div class="col-md-1">
+              <button type="button" id="addPhysicalAddress" class="btn btn-primary">+</button>
+            </div>
+            <div class="col-md">
+              <h3>Physical Address</h3>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <select type="text"  class="form-control" id="physical-address-type">
+                  <option selected disabled value="">Choose Type</option>
+                  <option value="home">Home</option>
+                  <option value="work">Work</option>
+                  <option value="recreation">Recreation</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md">
+              <label for="street-name">Street:</label>
+              <input type="text"  class="form-control" id="street-name">
+            </div>
+          </div>
+          <div class='row'>
+            <div class="form-group col-md-6">
+              <label for="city">City:</label>
+              <input type="text"  class="form-control" id="city">
+            </div>
+            <div class="form-group col-md">
+              <label for="state">State:</label>
+              <input type="text"  class="form-control" id="state">
+            </div>
+            <div class="form-group col-md">
+              <label for="zipcode">Zipcode:</label>
+              <input type="text"  class="form-control" id="zipcode">
+            </div>
+          </div>
+          <div class="new-address-input"></div>
+
+        <!-- Email Input Fields-->
+          <div class="row section">
+            <div class="col-md-1">
+              <button type="button" id="addEmailAddress" class="btn btn-primary">+</button>
+            </div>
+            <div class="col-md">
+              <h3>Email Address</h3>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <select id='email-address-type' class="form-control" id="email-type">
+                  <option selected disabled value="">Choose Type</option>
+                  <option value="home">Home</option>
+                  <option value="work">Work</option>
+                  <option value="recreation">Mobile</option>
+                  <option value="recreation">Emergency Contact</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email"  class="form-control" id="email-address">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" id="add-contact">Add New Contact</button>
         </form>
+      
         <hr>
-        <h2>Contacts:</h2>
+
+        <h2 class="clearfix">Contacts:</h2>
         <ul id="contacts">
         </ul>
       </div>
       <div class="col-md-6">
+        <!-- Display contents of Address Object -->
         <div id="show-contact">
           <p>First Name: <span class="first-name"></span></p>
           <p>Last Name: <span class="last-name"></span></p>
           <p>Phone Number: <span class="phone-number"></span></p>
-          <div id="buttons">
-          </div>
+          <p>Address: <span class="phone-number"></span></p>
+          <p>Eamil: <span class="phone-number"></span></p>
+          <div id="buttons"></div>
         </div>
       </div>
     </div>
