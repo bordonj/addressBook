@@ -235,6 +235,50 @@ $(document).ready(function() {
     
     $(`#${idToDelete}`).remove()
   });
+
+  let currentEmailId = 0;
+  $('#addEmailAddress').on('click', function() {
+    function currentEmailDivId () {
+      return currentId += 1;
+    }
+    currentEmailDivId();  
+    
+    let htmlString = `
+    <div class='new-email-address' id='${currentEmailId}'>
+      <div class="row section">
+        <div class="col-md-1">
+          <button type="button" class="btn btn-primary removeEmailAddress" data-emailId='${currentEmailId}'>-</button>
+        </div>
+        <div class="col-md">
+          <h3>Email Address</h3>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <select id='email-address-type' class="form-control" id="email-type">
+              <option selected disabled value="">Choose Type</option>
+              <option value="home">Home</option>
+              <option value="work">Work</option>
+              <option value="recreation">Mobile</option>
+              <option value="recreation">Emergency Contact</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email"  class="form-control" id="email-address">
+      </div>
+    </div>`
+    
+    $('.new-email-input').append(htmlString);
+  })
+
+  $(".new-email-input").on("click", ".removeEmailAddress", function() {
+
+    const idToDelete = $(this).attr('data-emailId')
+    
+    $(`#${idToDelete}`).remove()
+  });
   
 });
 
