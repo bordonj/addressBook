@@ -177,16 +177,17 @@ $(document).ready(function() {
 
   let currentId = 0;
   $('#addPhysicalAddress').on('click', function() {
+    console.log('firstclick currentId', currentId);
     function currentDivId () {
       return currentId += 1;
     }
-    currentDivId();
+    currentDivId();  
     
-    let htmlString = 
-    `<div class="new-physical-address" id='${currentId}'>
+    let htmlString = `
+    <div class="new-physical-address" id='${currentId}'>
       <div class="row section"> 
         <div class="col-md-1">
-          <button type="button" class="btn btn-primary removePhysicalAddress">-</button>
+          <button type="button" class="btn btn-primary removePhysicalAddress" data-id="${currentId}">-</button>
         </div>
         <div class="col-md">
           <h3>Physical Address</h3>
@@ -223,13 +224,23 @@ $(document).ready(function() {
         </div>
       </div>
     </div>`
-  
+    
     $('.new-address-input').append(htmlString);
-  
-
-    $(".new-address-input").on("click", ".removePhysicalAddress", function() {
-      $(`#${currentId}`).remove();
-    });
   })
+
+  $(".new-address-input").on("click", ".removePhysicalAddress", function() {
+    console.log('clicked to remove, currentId:', currentId);
+
+    const idToDelete = $(this).attr('data-id')
+    
+    $(`#${idToDelete}`).remove()
+  });
   
 });
+
+// fixed ----
+// the event watcher was firing multiple times
+// we ended up with a duplicate ID
+// maybe we aren't trying to delete the correct element?
+
+// to fix ----
